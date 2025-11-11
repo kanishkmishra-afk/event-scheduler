@@ -1,5 +1,5 @@
 import { Event } from "../models/eventModel.js"
-
+//create event API
 export const createEvent=async(req,res)=>{
     try {
         const {title,description,location,atttendies}=req.body

@@ -16,3 +16,87 @@ export const createEvent=async(req,res)=>{
         
     }
 }
+export const editEvent=async(req,res)=>{
+    try {
+        const {eventId,title,description,location}=req.body
+
+        const event=await Event.findByIdAndUpdate(eventId,{
+            title,
+            description,
+            location
+        },
+        {new:true}
+    )
+        return res.status(201).json(event)
+    } catch (error) {
+        console.log("edit event ERROR ::",error);
+        
+    }
+}
+
+export const deleteEvent=async(req,res)=>{
+    try {
+        const {eventId}=req.body
+        await Event.findByIdAndDelete(eventId)
+        return res.status(200).json({message:"event deleted successfullt"})
+        
+    } catch (error) {
+        console.log(("delete event ERROR::",error));
+        
+    }
+}
+
+export const getAllEvents=async(req,res)=>{
+    try {
+        const events=await Event.find({})
+
+        return res.status(200).json(events)
+    } catch (error) {
+        console.log("get all events ERROR ::",error);
+        
+    }
+}
+
+export const getEvent=(req,res)=>{
+    try {
+        
+    } catch (error) {
+        
+    }
+}
+
+
+export const joinEvent=async(req,res)=>{
+    try {
+        const {eventId,name}=req.body
+        //i will update it later and get a user id from middleware and will store the name of that user in attendies array
+        // const userId=req.userId
+
+        const event= await Event.findByIdAndUpdate(eventId,{$addToSet:{atttendies:name}},
+            {new:true}
+        )
+        //more checks can goes here
+        
+        return res.status(201).json(event)
+    } catch (error) {
+        console.log(("join Event ERROR ::",error));
+        
+    }
+}
+
+export const leaveEvent=async(req,res)=>{
+    try {
+        const {eventId,name}=req.body
+         //i will update it later and get a user id from middleware and will store the name of that user in attendies array
+        // const userId=req.userId
+
+        const event=await Event.findByIdAndUpdate(eventId,{$pull:{atttendies:name}},
+            {new:true}
+        )
+        //more checks can goes here
+        res.status(201).json(event)
+    } catch (error) {
+        console.log(("leave Event ERROR ::"),error);
+        
+    }
+}

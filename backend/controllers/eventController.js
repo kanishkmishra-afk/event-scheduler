@@ -16,6 +16,8 @@ export const createEvent=async(req,res)=>{
         
     }
 }
+
+//edit event: here i will get the event and its value which ive to change
 export const editEvent=async(req,res)=>{
     try {
         const {eventId,title,description,location}=req.body
@@ -33,7 +35,7 @@ export const editEvent=async(req,res)=>{
         
     }
 }
-
+//delete Event API : i will just send the response message and frontend will manage it
 export const deleteEvent=async(req,res)=>{
     try {
         const {eventId}=req.body
@@ -53,14 +55,6 @@ export const getAllEvents=async(req,res)=>{
         return res.status(200).json(events)
     } catch (error) {
         console.log("get all events ERROR ::",error);
-        
-    }
-}
-
-export const getEvent=(req,res)=>{
-    try {
-        
-    } catch (error) {
         
     }
 }

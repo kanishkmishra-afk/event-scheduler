@@ -8,7 +8,7 @@ export const createEvent=async(req,res)=>{
             title,
             description,
             location,
-            atttendies
+            atttendies,
         })
         return res.status(201).json(event)
     } catch (error) {

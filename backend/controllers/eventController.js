@@ -1,4 +1,5 @@
 import { Event } from "../models/eventModel.js"
+import { User } from "../models/userModel.js"
 //create event API
 export const createEvent=async(req,res)=>{
     try {
@@ -62,10 +63,11 @@ export const getAllEvents=async(req,res)=>{
 
 export const joinEvent=async(req,res)=>{
     try {
-        const {eventId,name}=req.body
-        //i will update it later and get a user id from middleware and will store the name of that user in attendies array
-        // const userId=req.userId
-
+        const {eventId}=req.body
+        const userId=req.userId
+        const user= await User.findById(userId)
+    //we can perform some checks here also
+        const name=user.userName
         const event= await Event.findByIdAndUpdate(eventId,{$addToSet:{atttendies:name}},
             {new:true}
         )
@@ -80,15 +82,17 @@ export const joinEvent=async(req,res)=>{
 
 export const leaveEvent=async(req,res)=>{
     try {
-        const {eventId,name}=req.body
-         //i will update it later and get a user id from middleware and will store the name of that user in attendies array
-        // const userId=req.userId
-
+         const {eventId}=req.body
+        const userId=req.userId
+        const user= await User.findById(userId)
+    //we can perform some checks here also
+        const name=user.userName
         const event=await Event.findByIdAndUpdate(eventId,{$pull:{atttendies:name}},
             {new:true}
         )
         //more checks can goes here
-        res.status(201).json(event)
+        
+        return res.status(201).json(event)
     } catch (error) {
         console.log(("leave Event ERROR ::"),error);
         

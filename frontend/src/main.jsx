@@ -5,11 +5,14 @@ import App from './App.jsx'
 import {BrowserRouter} from 'react-router-dom'
 
 import { EventContextProvider } from './context/EventContext.jsx'
+import { UserContextProvider } from './context/UserContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-  <EventContextProvider>
-    <App />
-  </EventContextProvider>
-  </BrowserRouter>
+  <UserContextProvider>
+      <EventContextProvider>
+        <App />
+      </EventContextProvider>
+  </UserContextProvider>
+      </BrowserRouter>
 )

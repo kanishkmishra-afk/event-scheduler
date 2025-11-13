@@ -14,9 +14,9 @@ function AddEvent() {
     const handleEvent=async(e)=>{
         e.preventDefault()
         try {
-            const response=await axios.post(serverURL+"api/event/createEvent",{title:newevent.title,description:newevent.description,location:newevent.location})
+            const response=await axios.post(serverURL+"api/event/createEvent",{title:newevent.title,description:newevent.description,location:newevent.location},{withCredentials:true})
             if(response.data){
-                setEvents(newevent)
+                setEvents((prevEvent)=>[...events,response.data])
             }
         } catch (error) {
             console.log("handleEvent ERROR::",error);

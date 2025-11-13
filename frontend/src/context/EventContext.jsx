@@ -8,13 +8,13 @@ export const EventContextProvider=({children})=>{
     const serverURL="http://localhost:3000/"
 
     const getEvents=async()=>{
-        const response=await axios.get(serverURL + "api/event/getAllEvents")
+        const response=await axios.get(serverURL + "api/event/getAllEvents",{withCredentials:true})
         setEvents(response.data)
     }
     
     useEffect(()=>{
         getEvents()
-    },[])
+    },[setEvents])
     console.log(events);
 
     const value={

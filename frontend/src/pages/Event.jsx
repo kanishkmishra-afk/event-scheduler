@@ -1,12 +1,13 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { eventContext } from '../context/EventContext'
 import axios from 'axios'
 import { userContext } from '../context/UserContext'
 
 function Event() {
-    const {events,setEvents,serverURL}=useContext(eventContext)
-    const {user}=useContext(userContext)
+    const {events,setEvents,serverURL,getEvents}=useContext(eventContext)
+    const {user,setUser}=useContext(userContext)
     //handler logic when user clicks on join button
+    console.log("events co",events);
     const handleJoin=async(eventId)=>{
         try {
           const response= await axios.post(serverURL+"api/event/joinEvent",{eventId},{withCredentials:true})

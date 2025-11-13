@@ -12,7 +12,7 @@ export const UserContextProvider=({children})=>{
     const getCurrentUser=async()=>{
         try {
            const response=await axios.get(serverURL+"api/user/getCurrentUser",{withCredentials:true}) 
-           console.log(response.data);
+           console.log("data",response.data);
            setUser(response.data)
            
         } catch (error) {
@@ -20,15 +20,18 @@ export const UserContextProvider=({children})=>{
             
         }
     }
+    useEffect(()=>{
+        getCurrentUser()
+    },[setUser])
+
+    console.log("getcurret user",user);
+    
     const value={
         user,
         setUser,
         serverURL,
         getCurrentUser
     }
-    useEffect(()=>{
-        getCurrentUser()
-    },[setUser])
 
     return(
         <userContext.Provider value={value} >

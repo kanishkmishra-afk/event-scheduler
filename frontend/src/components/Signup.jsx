@@ -29,6 +29,7 @@ function Signup() {
     }
   return (
     <div className="max-w-lg w-full mx-auto p-6 bg-gray-800 rounded-lg shadow-lg pt-10 mt-40">
+        <p className='text-xl text-white px-30'>Sign up to see events</p>
       <form onSubmit={handleSubmit} className="space-y-10 pt-3">
         {/* we can also add an name property here inside input and then send it to the handle submit through event and change its value accordingly([key]:value) */}
         <input onChange={(e)=>setSignupData(prevData=>({...prevData,userName:e.target.value}))} type="text" required placeholder='userName' className="w-full px-4 py-2 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"

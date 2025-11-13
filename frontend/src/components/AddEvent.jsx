@@ -1,16 +1,18 @@
 import axios from 'axios'
 import React, { useContext, useState } from 'react'
 import { eventContext } from '../context/EventContext'
+import { userContext } from '../context/UserContext'
 
 function AddEvent() {
     const {events,setEvents,serverURL}=useContext(eventContext)
+    const {user}=useContext(userContext)
     const [newevent,setNewEvent]=useState({
         title:"",
         description:"",
         location:"",
         datetime:""
     })
-
+console.log(user);
     const handleEvent=async(e)=>{
         e.preventDefault()
         try {
